@@ -7,19 +7,28 @@ const News = require('../models/news')
 //cuando pidan la ruta inicial / voy a devolver con el handeler de eventos de node (req,res)
 //con res.send defino la respuesta que va a tener la peticion GET a la ruta inicial /
 
-router.get('/', async (req, res) => {
-    const news = await News.find();
-    console.log(news);
-    res.json(news);
+ router.get('/', async (req, res) => {
+     const news = await News.find();
+     console.log(news);
+     res.json(news);
     
-});
+ });
 
 //Obtener una unica NEWS por ID
 router.get('/:id', async (req, res) => {
     const news = await News.findById(req.params.id);
     res.json(news);
-
 });
+
+
+//PRUEBA OBTENER SOLO CON VALOR X
+// router.get('/:archived', async (req, res) => {
+//     const news = await News.find({status: { $eq: "archived"}});
+//     console.log(news);
+//     res.json(news);
+    
+// });
+
 
 
 //POST

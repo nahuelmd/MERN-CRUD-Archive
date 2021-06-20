@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import news from '../models/news';
 
 class App extends Component {
-
     constructor() {
         super();
         this.state= {
@@ -10,7 +9,7 @@ class App extends Component {
             description: '',
             date: Date(),
             author:'',
-            archiveDate:Date(),
+            archiveDate:'',
             status: 'available',
             news:[],
             _id: ''
@@ -175,7 +174,7 @@ class App extends Component {
                     description: data.description,
                     date: data.date,
                     author: data.author,
-                    archiveDate: data.archiveDate,
+                    archiveDate: Date(),
                     status: 'archived',
                     _id: data._id
                 });

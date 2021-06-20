@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import news from '../models/news';
 
 class App extends Component {
 
@@ -17,6 +18,29 @@ class App extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.addNews = this.addNews.bind(this);
     }
+
+
+    //Get data from API  and sort by Date of creation
+    fetchNews(){
+        fetch('/api/news')
+        //Convierto los datos a JSON
+        .then(res => res.json())
+        .then(data => {
+            //obtengo data y luego lo asigno al news que ya viene vacio desde el state de la app []
+            this.setState({news: data});
+
+            // console.log(this.state.news)
+
+            var ordenado = (this.state.news)        
+            const newOrdenado = ordenado.sort(byDate);
+            //sort by date, first newer
+            function byDate(a, b) {
+                return new Date(b.date).valueOf() - new Date(a.date).valueOf() ;
+            }            
+            this.setState({news: newOrdenado})
+        });
+    }
+
 
     //AGREGAR LA NOTICIA A LA API
     addNews(e){
@@ -92,16 +116,7 @@ class App extends Component {
         this.fetchNews();
     }
 
-    fetchNews(){
-        fetch('/api/news')
-        //Convierto los datos a JSON
-        .then(res => res.json())
-        .then(data => {
-            //obtengo data y luego lo asigno al news[vacio]
-            this.setState({news: data});
-            console.log(this.state.news)
-        });
-    }
+
 
 
 

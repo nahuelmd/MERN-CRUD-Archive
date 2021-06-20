@@ -8,7 +8,11 @@ const News = require('../models/news')
 //con res.send defino la respuesta que va a tener la peticion GET a la ruta inicial /
 
  router.get('/', async (req, res) => {
-     const news = await News.find();
+    //Hago la consulta a mongo y la ordeno por fecha (date)
+    //  const news = await News.find().sort({"date": -1});
+     
+    
+    const news = await News.find();
      console.log(news);
      res.json(news);
     

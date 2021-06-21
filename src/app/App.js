@@ -39,7 +39,7 @@ class App extends Component {
             this.setState({news: newOrdenado})
         });
     }
-    //Get ARCHIVED data from API  and sort by Date of creation
+    //Get ARCHIVED data from API  and sort by Date of archived
     fetchArchivedNews(){
         fetch('/api/news')
         //Convierto los datos a JSON
@@ -54,7 +54,7 @@ class App extends Component {
             const newOrdenado = ordenado.sort(byDate);
             //sort by date, first newer
             function byDate(a, b) {
-                return new Date(b.date).valueOf() - new Date(a.date).valueOf() ;
+                return new Date(b.archiveDate).valueOf() - new Date(a.archiveDate).valueOf() ;
             }            
             this.setState({news: newOrdenado})
         });
@@ -108,7 +108,8 @@ class App extends Component {
                 archiveDate:Date(),
                 status: 'available',
                 });
-                this.fetchNews();
+                this.setState({view: 'available'})
+                this.fetchAvailableNews();
 
             });
         
@@ -139,7 +140,8 @@ class App extends Component {
                    archiveDate:Date(),
                    status: 'available',
                    });
-                   this.fetchNews();
+                   this.setState({view: 'available'})
+                   this.fetchAvailableNews();
                })
                .catch(err => console.log(err));
         }
@@ -161,7 +163,8 @@ class App extends Component {
         .then(data => {
             console.log(data);
             M.toast({html: 'Deleted'});   
-            this.fetchNews();
+            this.setState({view: 'archived'})
+            this.fetchArchivedNews()
         })
         }
 
@@ -286,13 +289,13 @@ class App extends Component {
                         //Seteo el estado de la aplicacion que es el que se muestra en el form
                         this.setState({title:'',
                         description:'',
-                        date: Date(),
+                        date: data.date,
                         author:'',
                         archiveDate:Date(),
                         status: 'available',
-                        _id: '',
-                        view: 'available'
+                        _id: '',                        
                         });
+                        this.setState({view: 'available'})
                         this.fetchAvailableNews()
         
                     });
@@ -368,12 +371,12 @@ class App extends Component {
                     {/* NAVEGACION */}
                     <nav className="light-blue darken-4" >
                         <div className="container">
-                            <a className="brand-logo" href="/">All Funds</a>
+                            <a className="brand-logo" href="/">New</a>
                         </div>                    
                     </nav>
                     <nav className="light-blue darken-4" >
                         <div className="container">
-                            <a className="brand-logo" onClick={() => this.viewChanger()} >Archived News</a>
+                            <a className="brand-logo" onClick={() => this.viewChanger()} >Archived</a>
                             {/* <a className="brand-logo" onClick={() => this.setState({view: 'archived'})} >Archived News</a> */}
                         </div>                    
                     </nav>
@@ -440,7 +443,7 @@ class App extends Component {
                                                         <td>{news.status}</td>
                                                         <td>
                                                             <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.editNews(news._id)} >edit</i></button>
-                                                            <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.deleteNews(news._id)} >delete</i></button>
+                                                            {/* <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.deleteNews(news._id)} >delete</i></button> */}
                                                             <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.archiveNews(news._id)} >archive</i></button>
                                                             
                                                         </td>
@@ -464,12 +467,12 @@ class App extends Component {
                     {/* NAVEGACION */}
                     <nav className="light-blue darken-4" >
                         <div className="container">
-                            <a className="brand-logo" href="/">All Fundaaaaas</a>
+                            <a className="brand-logo" href="/">New</a>
                         </div>                    
                     </nav>
                     <nav className="light-blue darken-4" >
                         <div className="container">
-                            <a className="brand-logo" onClick={() => this.viewChanger()} >Archived News</a>
+                            <a className="brand-logo" onClick={() => this.viewChanger()} >Archived</a>
                             {/* <a className="brand-logo" onClick={() => this.setState({view: 'archived'})} >Archived News</a> */}
                         </div>                    
                     </nav>
@@ -535,7 +538,7 @@ class App extends Component {
                                                         <td>{news.archiveDate}</td>
                                                         <td>{news.status}</td>
                                                         <td>
-                                                            <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.editNews(news._id)} >edit</i></button>
+                                                            {/* <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.editNews(news._id)} >edit</i></button> */}
                                                             <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.deleteNews(news._id)} >delete</i></button>
                                                             <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.unArchiveNews(news._id)} >undo</i></button>
                                                             

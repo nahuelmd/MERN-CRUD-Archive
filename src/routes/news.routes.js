@@ -10,12 +10,9 @@ const News = require('../models/news')
  router.get('/', async (req, res) => {
     //Hago la consulta a mongo y la ordeno por fecha (date)
     //  const news = await News.find().sort({"date": -1});
-     
-    
     const news = await News.find();
-     console.log(news);
-     res.json(news);
-    
+    //  console.log(news);
+     res.json(news);    
  });
 
 //Obtener una unica NEWS por ID
@@ -29,11 +26,8 @@ router.get('/:id', async (req, res) => {
 // router.get('/:archived', async (req, res) => {
 //     const news = await News.find({status: { $eq: "archived"}});
 //     console.log(news);
-//     res.json(news);
-    
+//     res.json(news);    
 // });
-
-
 
 //POST
 router.post('/', async (req, res) => {

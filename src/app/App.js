@@ -264,7 +264,7 @@ class App extends Component {
                     description: data.description,
                     date: data.date,
                     author: data.author,
-                    archiveDate: Date(),
+                    archiveDate: '',
                     status: 'available',
                     _id: data._id
                 });
@@ -353,13 +353,9 @@ class App extends Component {
         //Al cargar la aplicacion ejecuto la funcion fetchNews Didmount sirve para eso.
     //Carga todas las noticias. 
     componentDidMount(){
-        // this.fetchNews();
-        
+        // this.fetchNews();        
         this.fetchAvailableNews()
         console.log('El componente fetchAvailableNews fue montado')
-        
-
-        
     }
 
     render() {     
@@ -376,7 +372,7 @@ class App extends Component {
                     </nav>
                     <nav className="light-blue darken-4" >
                         <div className="container">
-                            <a className="brand-logo" onClick={() => this.viewChanger()} >Archived</a>
+                            <a className="brand-logo" href="/" onClick={() => this.viewChanger()} >Archived</a>
                             {/* <a className="brand-logo" onClick={() => this.setState({view: 'archived'})} >Archived News</a> */}
                         </div>                    
                     </nav>

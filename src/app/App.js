@@ -22,17 +22,17 @@ class App extends Component {
     //Get data from API  and sort by Date of creation
     fetchNews(){
         fetch('/api/news')
-    //     //Convierto los datos a JSON
+         //Convierto los datos a JSON
         .then(res => res.json())
         .then(data => {
-    //         //obtengo data y luego lo asigno al news que ya viene vacio desde el state de la app []
+            //obtengo data y luego lo asigno al news que ya viene vacio desde el state de la app []
             this.setState({news: data});
 
-    //         // console.log(this.state.news)
+            // console.log(this.state.news)
 
             var ordenado = (this.state.news)        
             const newOrdenado = ordenado.sort(byDate);
-    //         //sort by date, first newer
+            //sort by date, first newer
             function byDate(a, b) {
                 return new Date(b.date).valueOf() - new Date(a.date).valueOf() ;
             }            
@@ -105,7 +105,7 @@ class App extends Component {
                 description:'',
                 date: Date(),
                 author:'',
-                archiveDate:Date(),
+                archiveDate:'',
                 status: 'available',
                 });
                 this.setState({view: 'available'})
@@ -137,7 +137,7 @@ class App extends Component {
                    description:'',
                    date: Date(),
                    author:'',
-                   archiveDate:Date(),
+                   archiveDate:'',
                    status: 'available',
                    });
                    this.setState({view: 'available'})
@@ -169,6 +169,7 @@ class App extends Component {
         }
 
     }
+    //para editar, desde el boton delete le paso el parametro del id a la funcion deleteNews
     editNews(id){
         fetch(`/api/news/${id}`)
         .then(res => res.json())
@@ -187,6 +188,7 @@ class App extends Component {
         });
 
     }
+    //para archivar, desde el boton delete le paso el parametro del id a la funcion deleteNews
     archiveNews(id){
         if(confirm(`Are you sure you want to archive this news? ID: ${id}`)){
             console.log('archiving: ', id);
@@ -248,7 +250,7 @@ class App extends Component {
         
 
     };
-
+    //para desarchivar, desde el boton delete le paso el parametro del id a la funcion deleteNews
     unArchiveNews(id){
         if(confirm(`Are you sure you want to unarchive this news? ID: ${id}`)){
             console.log('archiving: ', id);
@@ -312,7 +314,7 @@ class App extends Component {
 
     };
 
-//Manejador de cambios form
+    //Manejador de cambios form
     handleChange(e) {
         // console.log(e.target.name.value)
         const {name, value} = e.target;
@@ -322,12 +324,7 @@ class App extends Component {
         });
     }
 
-//Incluir el render en un IF asociado a una variable del estado. Si esta en vistaNueva muestra el form para agregar una nueva noticia. 
-//Si no esta vistaNueva y esta vistaArchived, entonces renderiza una nueva vista con los (divs que quiera incluir y armonizados con Materilize). 
-
-//Render en HTML
-
-
+    //Render en HTML
 
     viewChanger(){
     
@@ -379,6 +376,7 @@ class App extends Component {
     
                     {/* CONTENEDOR PRINCIPAL APLICACION */}
                     <div className="container">
+                    <h1>Add a News</h1>
                         <div className="row">
                             <div className="col s5">
                                 <div className="card" >
@@ -475,6 +473,7 @@ class App extends Component {
     
                     {/* CONTENEDOR PRINCIPAL APLICACION */}
                     <div className="container">
+                    <h1>Archived News</h1>
                         <div className="row">
                             <div className="col s5">
                                 <div className="card" >

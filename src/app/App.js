@@ -369,8 +369,7 @@ class App extends Component {
                     </nav>
                     <nav className="light-blue darken-4" >
                         <div className="container">
-                            <a className="brand-logo" href="/" onClick={() => this.viewChanger()} >Archived</a>
-                            {/* <a className="brand-logo" onClick={() => this.setState({view: 'archived'})} >Archived News</a> */}
+                            <a className="brand-logo" href="/" onClick={() => this.viewChanger()} >Archived</a>                            
                         </div>                    
                     </nav>
     
@@ -419,6 +418,7 @@ class App extends Component {
                                             <th>Author</th>
                                             <th>Archive Date</th>
                                             <th>Stauts</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
     
@@ -516,6 +516,7 @@ class App extends Component {
                                             <th>Author</th>
                                             <th>Archive Date</th>
                                             <th>Stauts</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
     
@@ -534,7 +535,7 @@ class App extends Component {
                                                         <td>{news.status}</td>
                                                         <td>
                                                             {/* <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.editNews(news._id)} >edit</i></button> */}
-                                                            <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.deleteNews(news._id)} >delete</i></button>
+                                                            <button className="btn light-blue darken-4" style={{margin: '1px', with: '200px', color: 'red'}}><i className="material-icons" onClick={() => this.deleteNews(news._id)} >delete</i></button>
                                                             <button className="btn light-blue darken-4" style={{margin: '1px'}}><i className="material-icons" onClick={() => this.unArchiveNews(news._id)} >undo</i></button>
                                                             
                                                         </td>
